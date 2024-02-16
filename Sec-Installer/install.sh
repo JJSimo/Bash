@@ -56,7 +56,7 @@ else
                 # Extract the option number and set it to be installed
                 option_number=$(echo $option | cut -d' ' -f1)
                 if [ "$option_number" -ne "0" ]; then
-                    choices+=" $option_number"
+                    choices+=" $option_number" 
                 fi
             done
             # Continue with the loop to process the rest of the choices
@@ -142,38 +142,38 @@ else
                 echo -e "\n\033[1m[*] Installing BurpSuite \033[0m"
                 # Define the version and architecture of Burp Suite to download
                 version="community" # or "professional" for the paid version
-                architecture="linux_64" # for  64-bit systems
-
+                architecture="linux" # for  64-bit systems
+                v="v2023_12_1_5" 
+                
                 # Download the Burp Suite installer script
-                wget https://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage -O burpsuite_${version}_${architecture}.sh
-
+                wget -S https://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage -O burpsuite_${version}_${architecture}_${v}.sh
                 # Make the installer script executable
-                chmod +x burpsuite_${version}_${architecture}.sh
+                chmod +x /home/simone/Downloads/Downloads/burpsuite_${version}_${architecture}_${v}.sh
 
                 # Install
-                if ./burpsuite_${version}_${architecture}.sh; then
-                    successful_installations+=("burpsuite_${version}_${architecture}")
+                if ./burpsuite_${version}_${architecture}_${v}.sh; then
+                    successful_installations+=("BurpSuite")
                 else
-                    failed_installations+=("burpsuite_${version}_${architecture}")
+                    failed_installations+=("BurpSuite")
                 fi
                 ;;
             10)
                 # Metasploit
                 echo -e "\n\033[1m[*] Installing Prerequisite Packages \033[0m"
-                apt install curl postgresql postgresql-contrib
+                apt install curl postgresql postgresql-contrib -y
                 
                 echo -e "\n\033[1m[*] Download metasploit installer script \033[0m"
                 curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
                 chmod 755 msfinstall
 
                 if ./msfinstall; then
-                    successful_installations+=("msfinstall")
+                    successful_installations+=("metasploit")
 
                     echo -e "\n\033[1m[*] Start and configure database \033[0m"
                     sudo systemctl start postgresql
                     msfdb init
                 else
-                    failed_installations+=("msfinstall")     
+                    failed_installations+=("metasploit")     
                 fi           
                 ;;
             11)
@@ -215,6 +215,9 @@ else
     echo -e "\n\033[31mTools not installed due to errors:\033[0m"
     for tool in "${failed_installations[@]}"; do
         echo -e "\033[31m[!] $tool\033[0m"
-    done
+        if [[ "$tool" == "BurpSuite" ]]; then
+            echo -e "\n\033[31mTo install BurpSuite please download the installer from https://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage\n- chmod +x file.sh \n- ./file.sh \033[0m"
+        fi
+    done 
     echo ""
 fi
