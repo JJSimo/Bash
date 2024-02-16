@@ -30,40 +30,39 @@ else
 
 
     sudo apt-get install dialog
-    cmd=(dialog --separate-output --checklist "[*] Please Select Software you want to install:"  22  76  16)
-    options=(0 "Install All" off
-             1 "nmap" off
-             2 "netdiscover" off
-             3 "dnsrecon" off
-             4 "nikto" off
-             5 "dirbuster" off
-             6 "dirb" off
-             7 "ffuf" off
-             8 "smbclient" off
-             9 "BurpSuite" off
-             10 "Metasploit" off
-             11 "netcat" off
-             12 "hashcat" off
-             13 "fcrackzip" off)
-    choices=$("${cmd[@]}" "${options[@]}"  2>&1 >/dev/tty)
+    #!/bin/bash
+    onoff=off
+    cmd=(dialog --output-fd 1 --separate-output --extra-button --extra-label "Select All" --cancel-label "Select None" --checklist "Select options:" 0 0 0)
+    load-dialog () {
+        options=(
+                    1 "nmap" $onoff
+                    2 "netdiscover" $onoff
+                    3 "dnsrecon" $onoff
+                    4 "nikto" $onoff
+                    5 "dirbuster" $onoff
+                    6 "dirb" $onoff
+                    7 "ffuf" $onoff
+                    8 "smbclient" $onoff
+                    9 "BurpSuite" $onoff
+                    10 "Metasploit" $onoff
+                    11 "netcat" $onoff
+                    12 "hashcat" $onoff
+                    13 "fcrackzip" $onoff
+        )
+        choices=$("${cmd[@]}" "${options[@]}")
+    }
+    load-dialog
+    exit_code="$?"
+    while [[ $exit_code -ne 0 ]]; do
+    case $exit_code in
+        1) clear; onoff=off; load-dialog;;
+        3) clear; onoff=on; load-dialog;;
+    esac
+    exit_code="$?"
+    done
     clear
     for choice in $choices
     do
-        # If the "Install All" option is selected, set all options to be installed
-        if [ "$choice" == "0" ]; then
-            for option in "${options[@]}"
-            do
-                # Extract the option number and set it to be installed
-                option_number=$(echo $option | cut -d' ' -f1)
-                if [ "$option_number" -ne "0" ]; then
-                    choices+=" $option_number" 
-                fi
-            done
-            # Continue with the loop to process the rest of the choices
-            continue
-        fi
-
-        # Code to process other choices
         case $choice in
             1)
                 # nmap
