@@ -53,6 +53,7 @@ else
     }
     load-dialog
     exit_code="$?"
+    
     while [[ $exit_code -ne 0 ]]; do
     case $exit_code in
         1) clear; onoff=off; load-dialog;;
@@ -60,6 +61,7 @@ else
     esac
     exit_code="$?"
     done
+    
     clear
     for choice in $choices
     do
@@ -215,7 +217,7 @@ else
     for tool in "${failed_installations[@]}"; do
         echo -e "\033[31m[!] $tool\033[0m"
         if [[ "$tool" == "BurpSuite" ]]; then
-            echo -e "\n\033[31mTo install BurpSuite please download the installer from https://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage\n- chmod +x file.sh \n- ./file.sh \033[0m"
+            echo -e "\n\033[31mTo install BurpSuite please download the installer from:\n https://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage\n- chmod +x file.sh \n- ./file.sh \033[0m"
         fi
     done 
     echo ""
