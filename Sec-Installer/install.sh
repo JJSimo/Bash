@@ -217,7 +217,7 @@ else
     for tool in "${failed_installations[@]}"; do
         echo -e "\033[31m[!] $tool\033[0m"
         if [[ "$tool" == "BurpSuite" ]]; then
-            echo -e "\n\033[31mTo install BurpSuite please download the installer from:\nhttps://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage\nThen:\n- chmod +x file.sh \n- ./file.sh \033[0m"
+            echo -e "\n\033[31mTo install BurpSuite please download the installer from:\nhttps://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage\nThen:\n- chmod +x file.sh \n- ./file.sh  \033[0m"
         fi
     done 
     echo ""
