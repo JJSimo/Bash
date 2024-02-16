@@ -1,15 +1,9 @@
 #!/bin/bash
 
-# Function to check if a package is installed
-function is_installed() {
-    dpkg -s "$1" &>/dev/null
-}
-
-# Function to check if a command is available
-function command_exists() {
-    command -v "$1" &>/dev/null
-}
-
+# This script is designed to install security tools on a Linux system
+# It will prompt the user to update and upgrade the system
+# Then it will prompt the user to select which security tools to install
+# The user can choose to install all the tools or select only those that interest him
 
 if [[ $EUID -ne  0 ]]; then
     echo "[!] This script must be run as root"  
@@ -24,6 +18,15 @@ else
         echo "[*] Updating and Upgrading"
         apt-get update && sudo apt-get upgrade -y
     fi
+
+    # Initialize arrays to track successful and failed installations
+    successful_installations=()
+    failed_installations=()
+
+    # Function to check if a command is available
+    command_exists() {
+        command -v "$1" &>/dev/null
+    }
 
 
     sudo apt-get install dialog
@@ -64,50 +67,79 @@ else
         case $choice in
             1)
                 # nmap
-                echo -e "[*] Installing nmap \n"
-                apt install nmap -y
+                echo -e "\n\033[1m[*] Installing nmap \033[0m"
+                if apt install nmap -y; then
+                    successful_installations+=("nmap")
+                else
+                    failed_installations+=("nmap")
+                fi
                 ;;
             2)
                 # netdiscover
-                echo -e "[*] Installing netdiscover \n"
-                apt install netdiscover -y
+                echo -e "\n\033[1m[*] Installing netdiscover \033[0m"
+                if apt install netdiscover -y; then
+                    successful_installations+=("netdiscover")
+                else
+                    failed_installations+=("netdiscover")
+                fi
                 ;;
             3)
                 # dnsrecon
-                echo -e "[*] Installing dnsrecon \n"
-                apt install -y dnsrecon
+                echo -e "\n\033[1m[*] Installing dnsrecon \033[0m"
+                if apt install dnsrecon -y; then
+                    successful_installations+=("dnsrecon")
+                else
+                    failed_installations+=("dnsrecon")
+                fi
                 ;;
             4)
                 # nikto
-                echo -e "[*] Installing nikto \n"
-                apt install -y nikto
+                echo -e "\n\033[1m[*] Installing nikto \033[0m"
+                if apt install nikto -y; then
+                    successful_installations+=("nikto")
+                else
+                    failed_installations+=("nikto")
+                fi
                 ;;
             5)
                 # dirbuster
-                echo -e "[*] Installing dirbuster \n"
-                if ! apt install -y dirbuster; then
-                    echo "Error installing dirbuster"
+                echo -e "\n\033[1m[*] Installing dirbuster \033[0m"
+                if apt install dirbuster -y; then
+                    successful_installations+=("dirbuster")
+                else
+                    failed_installations+=("dirbuster")
                 fi
-                apt install dirbuster -y
                 ;;
             6)
                 # dirb
-                echo -e "[*] Installing dirb \n"
-                apt install dirb -y
+                echo -e "\n\033[1m[*] Installing dirb \033[0m"
+                if apt install dirb -y; then
+                    successful_installations+=("dirb")
+                else
+                    failed_installations+=("dirb")
+                fi
                 ;;
             7)
                 # ffuf
-                echo -e "[*] Installing ffuf \n"
-                apt install ffuf -y
+                echo -e "\n\033[1m[*] Installing ffuf \033[0m"
+                if apt install ffuf -y; then
+                    successful_installations+=("ffuf")
+                else
+                    failed_installations+=("ffuf")
+                fi
                 ;;
             8)
                 # smbclient
-                echo -e "[*] Installing smbclient \n"
-                apt install smbclient -y
+                echo -e "\n\033[1m[*] Installing smbclient \033[0m"
+                if apt install smbclient -y; then
+                    successful_installations+=("smbclient")
+                else
+                    failed_installations+=("smbclient")
+                fi
                 ;;
             9)
                 # BurpSuite
-                echo -e "[*] Installing BurpSuite \n"
+                echo -e "\n\033[1m[*] Installing BurpSuite \033[0m"
                 # Define the version and architecture of Burp Suite to download
                 version="community" # or "professional" for the paid version
                 architecture="linux_64" # for  64-bit systems
@@ -118,38 +150,71 @@ else
                 # Make the installer script executable
                 chmod +x burpsuite_${version}_${architecture}.sh
 
-                # Run the installer script
-                sudo ./burpsuite_${version}_${architecture}.sh
+                # Install
+                if ./burpsuite_${version}_${architecture}.sh; then
+                    successful_installations+=("burpsuite_${version}_${architecture}")
+                else
+                    failed_installations+=("burpsuite_${version}_${architecture}")
+                fi
                 ;;
             10)
                 # Metasploit
-                echo -e "[*] Installing Prerequisite Packages \n"
+                echo -e "\n\033[1m[*] Installing Prerequisite Packages \033[0m"
                 apt install curl postgresql postgresql-contrib
                 
-                echo -e "[*] Download metasploit installer script \n"
+                echo -e "\n\033[1m[*] Download metasploit installer script \033[0m"
                 curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
                 chmod 755 msfinstall
-                sudo ./msfinstall
 
-                echo -e "[*] Start and configure database \n"
-                sudo systemctl start postgresql
-                msfdb init
+                if ./msfinstall; then
+                    successful_installations+=("msfinstall")
+
+                    echo -e "\n\033[1m[*] Start and configure database \033[0m"
+                    sudo systemctl start postgresql
+                    msfdb init
+                else
+                    failed_installations+=("msfinstall")     
+                fi           
                 ;;
             11)
                 # netcat
-                echo -e "[*] Installing netcat \n"
-                apt install netcat -y
+                echo -e "\n\033[1m[*] Installing netcat \033[0m"
+                if apt install netcat -y; then
+                    successful_installations+=("netcat")
+                else
+                    failed_installations+=("netcat")
+                fi
                 ;;
             12)
                 # hashcat
-                echo -e "[*] Installing hashcat \n"
-                apt install hashcat -y
+                echo -e "\n\033[1m[*] Installing hashcat \033[0m"
+                if apt install hashcat -y; then
+                    successful_installations+=("hashcat")
+                else
+                    failed_installations+=("hashcat")
+                fi
                 ;;
             13)
                 # fcrackzip
-                echo -e "[*] Installing fcrackzip \n"
-                apt install fcrackzip -y
+                echo -e "\n\033[1m[*] Installing fcrackzip \033[0m"
+                if apt install fcrackzip -y; then
+                    successful_installations+=("fcrackzip")
+                else
+                    failed_installations+=("fcrackzip")
+                fi
                 ;;
         esac
     done
+
+    # After all installations have been attempted, print a summary
+    echo -e "\n\n\n\033[32mTools installed successfully:\033[0m"
+    for tool in "${successful_installations[@]}"; do
+        echo -e "\033[32m[*] $tool\033[0m"
+    done
+
+    echo -e "\n\033[31mTools not installed due to errors:\033[0m"
+    for tool in "${failed_installations[@]}"; do
+        echo -e "\033[31m[!] $tool\033[0m"
+    done
+    echo ""
 fi
