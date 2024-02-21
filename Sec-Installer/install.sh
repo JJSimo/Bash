@@ -48,6 +48,7 @@ else
                     11 "netcat" $onoff
                     12 "hashcat" $onoff
                     13 "fcrackzip" $onoff
+                    14 "responder" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -204,6 +205,19 @@ else
                     failed_installations+=("fcrackzip")
                 fi
                 ;;
+            14)
+                # responder
+                echo -e "\n\033[1m[*] Installing responder \033[0m"
+                git clone https://github.com/lgandx/Responder
+                cd Responder
+
+                if python3 -m pip install -r requirements.txt; then
+                    successful_installations+=("responder")
+                else
+                    failed_installations+=("responder")
+                fi
+                cd ../
+                ;;
         esac
     done
 
@@ -211,6 +225,9 @@ else
     echo -e "\n\n\n\033[32mTools installed successfully:\033[0m"
     for tool in "${successful_installations[@]}"; do
         echo -e "\033[32m[*] $tool\033[0m"
+        if [[ "$tool" == "responder" ]]; then
+            echo -e "\033[32m    To run responder navigate to the Responder directory and run: python3 Responder.py\n\033[0m"
+        fi
     done
 
     echo -e "\n\033[31mTools not installed due to errors:\033[0m"
