@@ -49,6 +49,7 @@ else
                     12 "hashcat" $onoff
                     13 "fcrackzip" $onoff
                     14 "responder" $onoff
+                    15 "ntlmrelayx.py" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -218,6 +219,24 @@ else
                 fi
                 cd ../
                 ;;
+            15)
+                # ntlmrelayx
+                echo -e "\n\033[1m[*] Installing dependencies \033[0m"
+                pip install ldap3 dnspython
+                pip install ldapdomaindump
+
+                echo -e "\n\033[1m[*] Installing ntlmrelayx.py \033[0m"
+
+                git clone https://github.com/CoreSecurity/impacket.git
+                cd impacket
+
+                if python3 setup.py install; then
+                    successful_installations+=("ntlmrelayx")
+                else
+                    failed_installations+=("ntlmrelayx")
+                fi
+                cd ../
+                ;;  
         esac
     done
 
