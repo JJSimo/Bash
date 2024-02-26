@@ -50,6 +50,7 @@ else
                     13 "fcrackzip" $onoff
                     14 "responder" $onoff
                     15 "ntlmrelayx.py (impacket)" $onoff
+                    16 "mitm6" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -234,6 +235,20 @@ else
                     successful_installations+=("ntlmrelayx (impacket)")
                 else
                     failed_installations+=("ntlmrelayx (impacket)")
+                fi
+                cd ../
+                ;;  
+
+                16)
+                # mitm6
+                echo -e "\n\033[1m[*] Installing mitm6 \033[0m"
+                git clone https://github.com/dirkjanm/mitm6
+                cd mitm6
+                pip install -r requirements.txt
+                if pip install mitm6; then
+                    successful_installations+=("mitm6")
+                else
+                    failed_installations+=("mitm6")
                 fi
                 cd ../
                 ;;  
