@@ -51,6 +51,7 @@ else
                     14 "responder" $onoff
                     15 "ntlmrelayx.py (impacket)" $onoff
                     16 "mitm6" $onoff
+                    17 "ldapdomaindump" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -149,6 +150,7 @@ else
                 architecture="linux" # for  64-bit systems
                 v="v2023_12_1_5" 
                 
+                cd /opt/
                 # Download the Burp Suite installer script
                 wget -S https://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage -O burpsuite_${version}_${architecture}_${v}.sh
                 # Make the installer script executable
@@ -167,6 +169,7 @@ else
                 apt install curl postgresql postgresql-contrib -y
                 
                 echo -e "\n\033[1m[*] Download metasploit installer script \033[0m"
+                cd /opt/
                 curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
                 chmod 755 msfinstall
 
@@ -210,6 +213,7 @@ else
             14)
                 # responder
                 echo -e "\n\033[1m[*] Installing responder \033[0m"
+                cd /opt/
                 git clone https://github.com/lgandx/Responder
                 cd Responder
 
@@ -227,7 +231,7 @@ else
                 pip install ldapdomaindump
 
                 echo -e "\n\033[1m[*] Installing ntlmrelayx.py \033[0m"
-
+                cd /opt/
                 git clone https://github.com/CoreSecurity/impacket.git
                 cd impacket
 
@@ -241,14 +245,32 @@ else
 
                 16)
                 # mitm6
-                echo -e "\n\033[1m[*] Installing mitm6 \033[0m"
+                echo -e "\n\033[1m[*] Installing dependencies \033[0m"
+                cd /opt/
                 git clone https://github.com/dirkjanm/mitm6
                 cd mitm6
                 pip install -r requirements.txt
+
+                echo -e "\n\033[1m[*] Installing mitm6 \033[0m"
                 if pip install mitm6; then
                     successful_installations+=("mitm6")
                 else
                     failed_installations+=("mitm6")
+                fi
+                cd ../
+                ;;  
+
+                17)
+                # ldapdomaindump
+                echo -e "\n\033[1m[*] Installing dependencies \033[0m"
+                cd /opt/
+                pip install ldap3 dnspython future
+
+                echo -e "\n\033[1m[*] Installing ldapdomaindump \033[0m"
+                if pip install ldapdomaindump; then
+                    successful_installations+=("ldapdomaindump")
+                else
+                    failed_installations+=("ldapdomaindump")
                 fi
                 cd ../
                 ;;  
