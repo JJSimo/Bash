@@ -49,7 +49,7 @@ else
                     12 "hashcat" $onoff
                     13 "fcrackzip" $onoff
                     14 "responder" $onoff
-                    15 "ntlmrelayx.py" $onoff
+                    15 "ntlmrelayx.py (impacket)" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -231,9 +231,9 @@ else
                 cd impacket
 
                 if python3 setup.py install; then
-                    successful_installations+=("ntlmrelayx")
+                    successful_installations+=("ntlmrelayx (impacket)")
                 else
-                    failed_installations+=("ntlmrelayx")
+                    failed_installations+=("ntlmrelayx (impacket)")
                 fi
                 cd ../
                 ;;  
