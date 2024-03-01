@@ -55,6 +55,7 @@ else
                     18 "neo4j" $onoff
                     19 "bloodhound" $onoff
                     20 "plumhound" $onoff
+                    21 "crackmapexec" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -316,6 +317,16 @@ else
                     failed_installations+=("plumhound")
                 fi
                 cd ../
+                ;; 
+                21)
+                # crackmapexec
+                echo -e "\n\033[1m[*] Installing crackmapexec \033[0m"
+                if snap install crackmapexec; then
+                    successful_installations+=("crackmapexec")
+                else
+                    failed_installations+=("crackmapexec")
+                fi
+
                 ;;  
 
 
@@ -338,6 +349,10 @@ else
         echo -e "\033[31m[!] $tool\033[0m"
         if [[ "$tool" == "BurpSuite" ]]; then
             echo -e "\n\033[31mTo install BurpSuite please download the installer from:\nhttps://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage\nThen:\n- chmod +x file.sh \n- ./file.sh  \033[0m"
+        fi
+
+        if [[ "$tool" == "crackmapexec" ]]; then
+            echo -e "\n\033[31mTo install crackmapexec you need to have snap  \033[0m"
         fi
     done 
     echo ""
