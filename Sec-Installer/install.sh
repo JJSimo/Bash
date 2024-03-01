@@ -54,6 +54,7 @@ else
                     17 "ldapdomaindump" $onoff
                     18 "neo4j" $onoff
                     19 "bloodhound" $onoff
+                    20 "plumhound" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -302,7 +303,24 @@ else
                     failed_installations+=("bloodhound")
                 fi
                 cd ../
+                ;; 
+                20)
+                # plumhound
+                echo -e "\n\033[1m[*] Installing plumhound \033[0m"
+                cd /opt/
+                git clone https://github.com/PlumHound/PlumHound.git
+                cd PlumHound
+                if sudo pip3 install -r requirements.txt; then
+                    successful_installations+=("plumhound")
+                else
+                    failed_installations+=("plumhound")
+                fi
+                cd ../
                 ;;  
+
+
+
+                
         esac
     done
 
