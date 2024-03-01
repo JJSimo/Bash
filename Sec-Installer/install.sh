@@ -52,6 +52,7 @@ else
                     15 "ntlmrelayx.py (impacket)" $onoff
                     16 "mitm6" $onoff
                     17 "ldapdomaindump" $onoff
+                    18 "bloodhound" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -271,6 +272,18 @@ else
                     successful_installations+=("ldapdomaindump")
                 else
                     failed_installations+=("ldapdomaindump")
+                fi
+                cd ../
+                ;;  
+                18)
+                # bloodhound
+                echo -e "\n\033[1m[*] Installing ldapdomaindump \033[0m"
+                cd /opt/
+                
+                if pip install bloodhound; then
+                    successful_installations+=("bloodhound")
+                else
+                    failed_installations+=("bloodhound")
                 fi
                 cd ../
                 ;;  
