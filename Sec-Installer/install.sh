@@ -52,7 +52,8 @@ else
                     15 "ntlmrelayx.py (impacket)" $onoff
                     16 "mitm6" $onoff
                     17 "ldapdomaindump" $onoff
-                    18 "bloodhound" $onoff
+                    18 "neo4j" $onoff
+                    19 "bloodhound" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -276,8 +277,23 @@ else
                 cd ../
                 ;;  
                 18)
+                # neo4j
+                echo -e "\n\033[1m[*] Installing dependencies \033[0m"
+                cd /opt/
+                curl -fsSL https://debian.neo4j.com/neotechnology.gpg.key |sudo gpg --dearmor -o /usr/share/keyrings/neo4j.gpg
+                echo "deb [signed-by=/usr/share/keyrings/neo4j.gpg] https://debian.neo4j.com stable 4.1" | sudo tee -a /etc/apt/sources.list.d/neo4j.list
+                apt update
+                echo -e "\n\033[1m[*] Installing neo4j \033[0m"
+                if apt install neo4j -y; then
+                    successful_installations+=("neo4j")
+                else
+                    failed_installations+=("neo4j")
+                fi
+                cd ../
+                ;;  
+                19)
                 # bloodhound
-                echo -e "\n\033[1m[*] Installing ldapdomaindump \033[0m"
+                echo -e "\n\033[1m[*] Installing bloodhound \033[0m"
                 cd /opt/
                 
                 if pip install bloodhound; then
