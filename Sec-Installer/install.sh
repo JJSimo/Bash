@@ -39,7 +39,7 @@ else
                     2 "netdiscover" $onoff
                     3 "dnsrecon" $onoff
                     4 "assetfinder" $onoff
-                    5 "amass" $onoff
+                    5 "httprobe" $onoff
                     6 "nikto" $onoff
                     7 "dirbuster" $onoff
                     7 "dirb" $onoff
@@ -120,13 +120,13 @@ else
                 fi
                 ;;
             5)
-                # amass
-                echo -e "\n\033[1m[*] Installing amass \033[0m"
+                # httprobe
+                echo -e "\n\033[1m[*] Installing httprobe \033[0m"
                 
-                if sudo snap install amass; then
-                    successful_installations+=("amass")
+                if go install github.com/tomnomnom/httprobe@latest; then
+                    successful_installations+=("httprobe")
                 else
-                    failed_installations+=("amass")
+                    failed_installations+=("httprobe")
                 fi
                 ;;
             6)
@@ -393,7 +393,7 @@ else
         if [[ "$tool" == "assetfinder" ]]; then
             echo -e "\n\033[31mTo install assetfinder you need Go installed and having configured /usr/local/go/bin to the PATH \nhttps://go.dev/doc/install \033[0m"
         fi
-        if [[ "$tool" == "amass" ]]; then
+        if [[ "$tool" == "httprobe" ]]; then
             echo -e "\n\033[31mTo install assetfinder you need Go installed and having configured /usr/local/go/bin to the PATH \nhttps://go.dev/doc/install \033[0m"
         fi
         if [[ "$tool" == "BurpSuite" ]]; then
