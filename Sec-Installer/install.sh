@@ -38,26 +38,27 @@ else
                     1 "nmap" $onoff
                     2 "netdiscover" $onoff
                     3 "dnsrecon" $onoff
-                    4 "nikto" $onoff
-                    5 "dirbuster" $onoff
-                    6 "dirb" $onoff
-                    7 "ffuf" $onoff
-                    8 "smbclient" $onoff
-                    9 "BurpSuite" $onoff
-                    10 "Metasploit" $onoff
-                    11 "netcat" $onoff
-                    12 "hashcat" $onoff
-                    13 "fcrackzip" $onoff
-                    14 "responder" $onoff
-                    15 "ntlmrelayx.py (impacket)" $onoff
-                    16 "mitm6" $onoff
-                    17 "ldapdomaindump" $onoff
-                    18 "neo4j" $onoff
-                    19 "bloodhound" $onoff
-                    20 "plumhound" $onoff
-                    21 "crackmapexec" $onoff
-                    22 "proxychains" $onoff
-                    23 "sshuttle" $onoff
+                    4 "assetfinder" $onoff
+                    5 "nikto" $onoff
+                    6 "dirbuster" $onoff
+                    7 "dirb" $onoff
+                    8 "ffuf" $onoff
+                    9 "smbclient" $onoff
+                    10 "BurpSuite" $onoff
+                    11 "Metasploit" $onoff
+                    12 "netcat" $onoff
+                    13 "hashcat" $onoff
+                    14 "fcrackzip" $onoff
+                    15 "responder" $onoff
+                    16 "ntlmrelayx.py (impacket)" $onoff
+                    17 "mitm6" $onoff
+                    18 "ldapdomaindump" $onoff
+                    19 "neo4j" $onoff
+                    20 "bloodhound" $onoff
+                    21 "plumhound" $onoff
+                    22 "crackmapexec" $onoff
+                    23 "proxychains" $onoff
+                    24 "sshuttle" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -104,6 +105,20 @@ else
                 fi
                 ;;
             4)
+                # assetfinder
+                echo -e "\n\033[1m[*] Installing assetfinder \033[0m"
+                cd /opt/
+                git clone https://github.com/tomnomnom/assetfinder.git
+                cd assetfinder
+                go mod init assetfinder
+                if go build .; then
+                    successful_installations+=("assetfinder")
+                    mv assetfinder /usr/local/bin/
+                else
+                    failed_installations+=("assetfinder")
+                fi
+                ;;
+            5)
                 # nikto
                 echo -e "\n\033[1m[*] Installing nikto \033[0m"
                 if apt install nikto -y; then
@@ -112,7 +127,7 @@ else
                     failed_installations+=("nikto")
                 fi
                 ;;
-            5)
+            6)
                 # dirbuster
                 echo -e "\n\033[1m[*] Installing dirbuster \033[0m"
                 if apt install dirbuster -y; then
@@ -121,7 +136,7 @@ else
                     failed_installations+=("dirbuster")
                 fi
                 ;;
-            6)
+            7)
                 # dirb
                 echo -e "\n\033[1m[*] Installing dirb \033[0m"
                 if apt install dirb -y; then
@@ -130,7 +145,7 @@ else
                     failed_installations+=("dirb")
                 fi
                 ;;
-            7)
+            8)
                 # ffuf
                 echo -e "\n\033[1m[*] Installing ffuf \033[0m"
                 if apt install ffuf -y; then
@@ -139,7 +154,7 @@ else
                     failed_installations+=("ffuf")
                 fi
                 ;;
-            8)
+            9)
                 # smbclient
                 echo -e "\n\033[1m[*] Installing smbclient \033[0m"
                 if apt install smbclient -y; then
@@ -148,7 +163,7 @@ else
                     failed_installations+=("smbclient")
                 fi
                 ;;
-            9)
+            10)
                 # BurpSuite
                 echo -e "\n\033[1m[*] Installing BurpSuite \033[0m"
                 # Define the version and architecture of Burp Suite to download
@@ -169,7 +184,7 @@ else
                     failed_installations+=("BurpSuite")
                 fi
                 ;;
-            10)
+            11)
                 # Metasploit
                 echo -e "\n\033[1m[*] Installing Prerequisite Packages \033[0m"
                 apt install curl postgresql postgresql-contrib -y
@@ -189,7 +204,7 @@ else
                     failed_installations+=("metasploit")     
                 fi           
                 ;;
-            11)
+            12)
                 # netcat
                 echo -e "\n\033[1m[*] Installing netcat \033[0m"
                 if apt install netcat -y; then
@@ -198,7 +213,7 @@ else
                     failed_installations+=("netcat")
                 fi
                 ;;
-            12)
+            13)
                 # hashcat
                 echo -e "\n\033[1m[*] Installing hashcat \033[0m"
                 if apt install hashcat -y; then
@@ -207,7 +222,7 @@ else
                     failed_installations+=("hashcat")
                 fi
                 ;;
-            13)
+            14)
                 # fcrackzip
                 echo -e "\n\033[1m[*] Installing fcrackzip \033[0m"
                 if apt install fcrackzip -y; then
@@ -216,7 +231,7 @@ else
                     failed_installations+=("fcrackzip")
                 fi
                 ;;
-            14)
+            15)
                 # responder
                 echo -e "\n\033[1m[*] Installing responder \033[0m"
                 cd /opt/
@@ -230,7 +245,7 @@ else
                 fi
                 cd ../
                 ;;
-            15)
+            16)
                 # ntlmrelayx
                 echo -e "\n\033[1m[*] Installing dependencies \033[0m"
                 pip install ldap3 dnspython
@@ -249,7 +264,7 @@ else
                 cd ../
                 ;;  
 
-                16)
+            17)
                 # mitm6
                 echo -e "\n\033[1m[*] Installing dependencies \033[0m"
                 cd /opt/
@@ -266,7 +281,7 @@ else
                 cd ../
                 ;;  
 
-                17)
+            18)
                 # ldapdomaindump
                 echo -e "\n\033[1m[*] Installing dependencies \033[0m"
                 cd /opt/
@@ -280,7 +295,7 @@ else
                 fi
                 cd ../
                 ;;  
-                18)
+            19)
                 # neo4j
                 echo -e "\n\033[1m[*] Installing dependencies \033[0m"
                 cd /opt/
@@ -295,7 +310,7 @@ else
                 fi
                 cd ../
                 ;;  
-                19)
+            20)
                 # bloodhound
                 echo -e "\n\033[1m[*] Installing bloodhound \033[0m"
                 cd /opt/
@@ -307,7 +322,7 @@ else
                 fi
                 cd ../
                 ;; 
-                20)
+            21)
                 # plumhound
                 echo -e "\n\033[1m[*] Installing plumhound \033[0m"
                 cd /opt/
@@ -320,7 +335,7 @@ else
                 fi
                 cd ../
                 ;; 
-                21)
+            22)
                 # crackmapexec
                 echo -e "\n\033[1m[*] Installing crackmapexec \033[0m"
                 if snap install crackmapexec; then
@@ -329,7 +344,7 @@ else
                     failed_installations+=("crackmapexec")
                 fi
                 ;;  
-                22)
+            23)
                 # proxychains
                 echo -e "\n\033[1m[*] Installing proxychains \033[0m"
                 if apt-get install -y proxychains; then
@@ -338,7 +353,7 @@ else
                     failed_installations+=("proxychains")
                 fi
                 ;;
-                23)
+            24)
                 # sshuttle
                 echo -e "\n\033[1m[*] Installing sshuttle \033[0m"
                 if pip install sshuttle; then
@@ -363,6 +378,10 @@ else
     echo -e "\n\033[31mTools not installed due to errors:\033[0m"
     for tool in "${failed_installations[@]}"; do
         echo -e "\033[31m[!] $tool\033[0m"
+
+        if [[ "$tool" == "assetfinder" ]]; then
+            echo -e "\n\033[31mTo install assetfinder you need Go installed and having configured /usr/local/go/bin to the PATH \nhttps://go.dev/doc/install \033[0m"
+        fi
         if [[ "$tool" == "BurpSuite" ]]; then
             echo -e "\n\033[31mTo install BurpSuite please download the installer from:\nhttps://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage\nThen:\n- chmod +x file.sh \n- ./file.sh  \033[0m"
         fi
