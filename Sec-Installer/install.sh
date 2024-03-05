@@ -337,9 +337,6 @@ else
                     failed_installations+=("proxychains")
                 fi
                 ;;
-
-
-
                 
         esac
     done
