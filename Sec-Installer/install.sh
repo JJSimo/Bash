@@ -57,6 +57,7 @@ else
                     20 "plumhound" $onoff
                     21 "crackmapexec" $onoff
                     22 "proxychains" $onoff
+                    23 "sshuttle" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -335,6 +336,15 @@ else
                     successful_installations+=("proxychains")
                 else
                     failed_installations+=("proxychains")
+                fi
+                ;;
+                23)
+                # sshuttle
+                echo -e "\n\033[1m[*] Installing sshuttle \033[0m"
+                if pip install sshuttle; then
+                    successful_installations+=("sshuttle")
+                else
+                    failed_installations+=("sshuttle")
                 fi
                 ;;
                 
