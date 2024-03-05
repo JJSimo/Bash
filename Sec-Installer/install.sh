@@ -56,6 +56,7 @@ else
                     19 "bloodhound" $onoff
                     20 "plumhound" $onoff
                     21 "crackmapexec" $onoff
+                    22 "proxychains" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -326,8 +327,16 @@ else
                 else
                     failed_installations+=("crackmapexec")
                 fi
-
                 ;;  
+                22)
+                # proxychains
+                echo -e "\n\033[1m[*] Installing proxychains \033[0m"
+                if apt-get install -y proxychains; then
+                    successful_installations+=("proxychains")
+                else
+                    failed_installations+=("proxychains")
+                fi
+                ;;
 
 
 
