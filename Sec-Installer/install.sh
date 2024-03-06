@@ -211,7 +211,7 @@ do
             # Download the Burp Suite installer script
             #wget -S https://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage -O burpsuite_${version}_${architecture}_${v}.sh
             # Make the installer script executable
-            
+
             chmod +x burpsuite_${version}_${architecture}_${v}.sh
             # Install
             if ./burpsuite_${version}_${architecture}_${v}.sh; then
@@ -272,7 +272,7 @@ do
             sudo git clone https://github.com/lgandx/Responder
             cd Responder
 
-            if sudo python3 -m pip install -r requirements.txt; then
+            if python3 -m pip install -r requirements.txt; then
                 successful_installations+=("responder")
             else
                 failed_installations+=("responder")
@@ -282,8 +282,8 @@ do
         20)
             # ntlmrelayx
             echo -e "\n\033[1m[*] Installing dependencies \033[0m"
-            sudo pip install ldap3 dnspython
-            sudo pip install ldapdomaindump
+            pip install ldap3 dnspython
+            pip install ldapdomaindump
 
             echo -e "\n\033[1m[*] Installing ntlmrelayx.py \033[0m"
             cd /opt/
@@ -304,10 +304,10 @@ do
             cd /opt/
             sudo git clone https://github.com/dirkjanm/mitm6
             cd mitm6
-            sudo pip install -r requirements.txt
+            pip install -r requirements.txt
 
             echo -e "\n\033[1m[*] Installing mitm6 \033[0m"
-            if sudo pip install mitm6; then
+            if pip install mitm6; then
                 successful_installations+=("mitm6")
             else
                 failed_installations+=("mitm6")
@@ -319,10 +319,10 @@ do
             # ldapdomaindump
             echo -e "\n\033[1m[*] Installing dependencies \033[0m"
             cd /opt/
-            sudo pip install ldap3 dnspython future
+            pip install ldap3 dnspython future
 
             echo -e "\n\033[1m[*] Installing ldapdomaindump \033[0m"
-            if sudo pip install ldapdomaindump; then
+            if pip install ldapdomaindump; then
                 successful_installations+=("ldapdomaindump")
             else
                 failed_installations+=("ldapdomaindump")
@@ -349,7 +349,7 @@ do
             echo -e "\n\033[1m[*] Installing bloodhound \033[0m"
             cd /opt/
             
-            if sudo pip install bloodhound; then
+            if pip install bloodhound; then
                 successful_installations+=("bloodhound")
             else
                 failed_installations+=("bloodhound")
@@ -362,7 +362,7 @@ do
             cd /opt/
             git clone https://github.com/PlumHound/PlumHound.git
             cd PlumHound
-            if sudo pip3 install -r requirements.txt; then
+            if pip3 install -r requirements.txt; then
                 successful_installations+=("plumhound")
             else
                 failed_installations+=("plumhound")
@@ -390,7 +390,7 @@ do
         28)
             # sshuttle
             echo -e "\n\033[1m[*] Installing sshuttle \033[0m"
-            if sudo pip install sshuttle; then
+            if pip install sshuttle; then
                 successful_installations+=("sshuttle")
             else
                 failed_installations+=("sshuttle")
