@@ -41,26 +41,28 @@ else
                     4 "assetfinder" $onoff
                     5 "httprobe" $onoff
                     6 "GoWitness" $onoff
-                    7 "nikto" $onoff
-                    8 "dirbuster" $onoff
-                    9 "dirb" $onoff
-                    10 "ffuf" $onoff
-                    11 "smbclient" $onoff
-                    12 "BurpSuite" $onoff
-                    13 "Metasploit" $onoff
-                    14 "netcat" $onoff
-                    15 "hashcat" $onoff
-                    16 "fcrackzip" $onoff
-                    17 "responder" $onoff
-                    18 "ntlmrelayx.py (impacket)" $onoff
-                    19 "mitm6" $onoff
-                    20 "ldapdomaindump" $onoff
-                    21 "neo4j" $onoff
-                    22 "bloodhound" $onoff
-                    23 "plumhound" $onoff
-                    24 "crackmapexec" $onoff
-                    25 "proxychains" $onoff
-                    26 "sshuttle" $onoff
+                    7 "subjack" $onoff
+                    8 "ss" $onoff
+                    9 "nikto" $onoff
+                    10 "dirbuster" $onoff
+                    11 "dirb" $onoff
+                    12 "ffuf" $onoff
+                    13 "smbclient" $onoff
+                    14 "BurpSuite" $onoff
+                    15 "Metasploit" $onoff
+                    16 "netcat" $onoff
+                    17 "hashcat" $onoff
+                    18 "fcrackzip" $onoff
+                    19 "responder" $onoff
+                    20 "ntlmrelayx.py (impacket)" $onoff
+                    21 "mitm6" $onoff
+                    22 "ldapdomaindump" $onoff
+                    23 "neo4j" $onoff
+                    24 "bloodhound" $onoff
+                    25 "plumhound" $onoff
+                    26 "crackmapexec" $onoff
+                    27 "proxychains" $onoff
+                    28 "sshuttle" $onoff
         )
         choices=$("${cmd[@]}" "${options[@]}")
     }
@@ -139,6 +141,24 @@ else
                 fi
                 ;;
             7)
+                # subjack
+                echo -e "\n\033[1m[*] Installing subjack \033[0m"
+                if /usr/local/go/bin/go install  github.com/haccer/subjack@latest; then
+                    successful_installations+=("subjack")
+                else
+                    failed_installations+=("subjack")
+                fi
+                ;;
+            8)
+                # subjack
+                echo -e "\n\033[1m[*] Installing subjack \033[0m"
+                if /usr/local/go/bin/go install  github.com/haccer/subjack@latest; then
+                    successful_installations+=("subjack")
+                else
+                    failed_installations+=("subjack")
+                fi
+                ;;
+            9)
                 # nikto
                 echo -e "\n\033[1m[*] Installing nikto \033[0m"
                 if apt install nikto -y; then
@@ -147,7 +167,7 @@ else
                     failed_installations+=("nikto")
                 fi
                 ;;
-            8)
+            10)
                 # dirbuster
                 echo -e "\n\033[1m[*] Installing dirbuster \033[0m"
                 if apt install dirbuster -y; then
@@ -156,7 +176,7 @@ else
                     failed_installations+=("dirbuster")
                 fi
                 ;;
-            9)
+            11)
                 # dirb
                 echo -e "\n\033[1m[*] Installing dirb \033[0m"
                 if apt install dirb -y; then
@@ -165,7 +185,7 @@ else
                     failed_installations+=("dirb")
                 fi
                 ;;
-            10)
+            12)
                 # ffuf
                 echo -e "\n\033[1m[*] Installing ffuf \033[0m"
                 if apt install ffuf -y; then
@@ -174,7 +194,7 @@ else
                     failed_installations+=("ffuf")
                 fi
                 ;;
-            11)
+            13)
                 # smbclient
                 echo -e "\n\033[1m[*] Installing smbclient \033[0m"
                 if apt install smbclient -y; then
@@ -183,7 +203,7 @@ else
                     failed_installations+=("smbclient")
                 fi
                 ;;
-            12)
+            14)
                 # BurpSuite
                 echo -e "\n\033[1m[*] Installing BurpSuite \033[0m"
                 # Define the version and architecture of Burp Suite to download
@@ -204,7 +224,7 @@ else
                     failed_installations+=("BurpSuite")
                 fi
                 ;;
-            13)
+            15)
                 # Metasploit
                 echo -e "\n\033[1m[*] Installing Prerequisite Packages \033[0m"
                 apt install curl postgresql postgresql-contrib -y
@@ -224,7 +244,7 @@ else
                     failed_installations+=("metasploit")     
                 fi           
                 ;;
-            14)
+            16)
                 # netcat
                 echo -e "\n\033[1m[*] Installing netcat \033[0m"
                 if apt install netcat -y; then
@@ -233,7 +253,7 @@ else
                     failed_installations+=("netcat")
                 fi
                 ;;
-            15)
+            17)
                 # hashcat
                 echo -e "\n\033[1m[*] Installing hashcat \033[0m"
                 if apt install hashcat -y; then
@@ -242,7 +262,7 @@ else
                     failed_installations+=("hashcat")
                 fi
                 ;;
-            16)
+            18)
                 # fcrackzip
                 echo -e "\n\033[1m[*] Installing fcrackzip \033[0m"
                 if apt install fcrackzip -y; then
@@ -251,7 +271,7 @@ else
                     failed_installations+=("fcrackzip")
                 fi
                 ;;
-            17)
+            19)
                 # responder
                 echo -e "\n\033[1m[*] Installing responder \033[0m"
                 cd /opt/
@@ -265,7 +285,7 @@ else
                 fi
                 cd ../
                 ;;
-            18)
+            20)
                 # ntlmrelayx
                 echo -e "\n\033[1m[*] Installing dependencies \033[0m"
                 pip install ldap3 dnspython
@@ -284,7 +304,7 @@ else
                 cd ../
                 ;;  
 
-            19)
+            21)
                 # mitm6
                 echo -e "\n\033[1m[*] Installing dependencies \033[0m"
                 cd /opt/
@@ -301,7 +321,7 @@ else
                 cd ../
                 ;;  
 
-            20)
+            22)
                 # ldapdomaindump
                 echo -e "\n\033[1m[*] Installing dependencies \033[0m"
                 cd /opt/
@@ -315,7 +335,7 @@ else
                 fi
                 cd ../
                 ;;  
-            21)
+            23)
                 # neo4j
                 echo -e "\n\033[1m[*] Installing dependencies \033[0m"
                 cd /opt/
@@ -330,7 +350,7 @@ else
                 fi
                 cd ../
                 ;;  
-            22)
+            24)
                 # bloodhound
                 echo -e "\n\033[1m[*] Installing bloodhound \033[0m"
                 cd /opt/
@@ -342,7 +362,7 @@ else
                 fi
                 cd ../
                 ;; 
-            23)
+            25)
                 # plumhound
                 echo -e "\n\033[1m[*] Installing plumhound \033[0m"
                 cd /opt/
@@ -355,7 +375,7 @@ else
                 fi
                 cd ../
                 ;; 
-            24)
+            26)
                 # crackmapexec
                 echo -e "\n\033[1m[*] Installing crackmapexec \033[0m"
                 if snap install crackmapexec; then
@@ -364,7 +384,7 @@ else
                     failed_installations+=("crackmapexec")
                 fi
                 ;;  
-            25)
+            27)
                 # proxychains
                 echo -e "\n\033[1m[*] Installing proxychains \033[0m"
                 if apt-get install -y proxychains; then
@@ -373,7 +393,7 @@ else
                     failed_installations+=("proxychains")
                 fi
                 ;;
-            26)
+            28)
                 # sshuttle
                 echo -e "\n\033[1m[*] Installing sshuttle \033[0m"
                 if pip install sshuttle; then
@@ -399,7 +419,7 @@ else
     for tool in "${failed_installations[@]}"; do
         echo -e "\033[31m[!] $tool\033[0m"
 
-        if [ "$tool" == "assetfinder" ] || [ "$tool" == "httprobe" ] || [ "$tool" == "GoWitness" ]; then
+        if [ "$tool" == "assetfinder" ] || [ "$tool" == "httprobe" ] || [ "$tool" == "GoWitness" ] || [ "$tool" == "subjack" ]; then
             echo -e "\n\033[31mTo install assetfinder you need Go installed and having configured /usr/local/go/bin to the PATH \nhttps://go.dev/doc/install \033[0m"
         fi
         
