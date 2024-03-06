@@ -209,10 +209,10 @@ do
             v="v2023_12_1_5" 
             
             # Download the Burp Suite installer script
-            wget -S https://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage -O burpsuite_${version}_${architecture}_${v}.sh
+            #wget -S https://portswigger.net/burp/communitydownload?requestSource=communityDownloadPage -O burpsuite_${version}_${architecture}_${v}.sh
             # Make the installer script executable
-            chmod +x /home/simone/Downloads/Downloads/burpsuite_${version}_${architecture}_${v}.sh
-            cd /home/simone/Downloads/Downloads/
+            
+            chmod +x burpsuite_${version}_${architecture}_${v}.sh
             # Install
             if ./burpsuite_${version}_${architecture}_${v}.sh; then
                 successful_installations+=("BurpSuite")
