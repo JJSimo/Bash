@@ -17,3 +17,4 @@ If you already have Go or in any case you have to
     - assetfinder
     - httprobe
     - GoWitness
+    - subjack
