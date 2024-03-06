@@ -59,6 +59,7 @@ else
         #                           - for example a subdomains whose payment has not been renewed
         #                           - => this attack can be used to purchase the domain and use it for malicious purposes
         #                           - => in this way you have got a subdomains inside the target domain
+        #                           - => as an attacker you have controll of an org's subdomain
 		subjack -w $url/recon/final.txt -t 100 -timeout 30 -ssl -c ~/go/src/github.com/haccer/subjack/fingerprints.json -v 3 -o $url/recon/potential_takeovers/potential_takeovers.txt
 		
 		echo "[*] Scanning for open ports"
