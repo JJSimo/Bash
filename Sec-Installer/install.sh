@@ -112,8 +112,8 @@ else
                 cd /opt/
                 git clone https://github.com/tomnomnom/assetfinder.git
                 cd assetfinder
-                go mod init assetfinder
-                if go build .; then
+                /usr/local/go/bin/go mod init assetfinder
+                if /usr/local/go/bin/go build .; then
                     successful_installations+=("assetfinder")
                     mv assetfinder /usr/local/bin/
                 else
@@ -123,8 +123,7 @@ else
             5)
                 # httprobe
                 echo -e "\n\033[1m[*] Installing httprobe \033[0m"
-                
-                if go install github.com/tomnomnom/httprobe@latest; then
+                if /usr/local/go/bin/go install github.com/tomnomnom/httprobe@latest; then
                     successful_installations+=("httprobe")
                 else
                     failed_installations+=("httprobe")
@@ -133,7 +132,7 @@ else
             6)
                 # GoWitness
                 echo -e "\n\033[1m[*] Installing GoWitness \033[0m"
-                if go install github.com/sensepost/gowitness@latest; then
+                if /usr/local/go/bin/go install github.com/sensepost/gowitness@latest; then
                     successful_installations+=("GoWitness")
                 else
                     failed_installations+=("GoWitness")
