@@ -60,6 +60,7 @@ load-dialog () {
                 26 "crackmapexec" $onoff
                 27 "proxychains" $onoff
                 28 "sshuttle" $onoff
+                29 "sqlmap" $onoff
     )
     choices=$("${cmd[@]}" "${options[@]}")
 }
@@ -394,6 +395,15 @@ do
                 successful_installations+=("sshuttle")
             else
                 failed_installations+=("sshuttle")
+            fi
+            ;;
+        29)
+            # sqlmap
+            echo -e "\n\033[1m[*] Installing sqlmap \033[0m"
+            if sudo apt install sqlmap -y; then
+                successful_installations+=("sqlmap")
+            else
+                failed_installations+=("sqlmap")
             fi
             ;;
             
