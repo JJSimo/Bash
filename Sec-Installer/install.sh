@@ -9,7 +9,7 @@
 # Prompt the user to decide if they want to update and upgrade
 echo -e "Do you want to update and upgrade? (Y/n)"
 read -r update_choice
-
+ 
 # If the user responds with 'Y' or 'y', perform the update and upgrade
 if [[ $update_choice =~ ^([yY])$ ]]; then
     echo "[*] Updating and Upgrading"
