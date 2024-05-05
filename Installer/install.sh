@@ -72,6 +72,8 @@ else
 fi
 
 
+
+
 #echo -e "\n\033[1m[*] Installing Google Chrome \033[0m"
 #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #if sudo dpkg -i google-chrome-stable_current_amd64.deb; then
