@@ -122,6 +122,13 @@ fi
 # NVIDIA Drivers
 # sudo apt install nvidia-driver-535 nvidia-dkms-535
 
+# Obsidian
+# https://obsidian.md/download
+# download deb
+# sudo dpkg -i .deb
+# Options > Community Plugin > Enable Community Plugin > Browse > Git > Install it and Enable it
+# CTRL+P > git clone a new repo 
+# look url in Bitwarden > Obsidian_Notes > enter
 
 
 
