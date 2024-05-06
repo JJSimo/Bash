@@ -123,7 +123,12 @@ fi
 # sudo apt install nvidia-driver-535 nvidia-dkms-535
 
 # Obsidian
-# 
+# https://obsidian.md/download
+# download deb
+# sudo dpkg -i .deb
+# Options > Community Plugin > Enable Community Plugin > Browse > Git > Install it and Enable it
+# CTRL+P > git clone a new repo 
+# https://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@github.com/JJSimo/Notes.git > Obsidian_Notes > enter
 
 
 echo -e "\n\n\n\033[32mTools installed successfully:\033[0m"
