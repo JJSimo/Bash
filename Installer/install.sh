@@ -71,7 +71,43 @@ else
     failed_installations+=("Flameshot")
 fi
 
+echo -e "\n\033[1m[*] Installing gnome-shell-extensions \033[0m"
+if sudo apt install gnome-shell-extensions -y; then
+    successful_installations+=("gnome-shell-extensions")
+else
+    failed_installations+=("gnome-shell-extensions")
+fi
 
+echo -e "\n\033[1m[*] Installing gnome-shell-extension-manager \033[0m"
+if sudo apt install gnome-shell-extension-manager -y; then
+    successful_installations+=("gnome-shell-extension-manager")
+else
+    failed_installations+=("gnome-shell-extension-manager")
+fi
+
+
+echo -e "\n\033[1m[*] Installing gnome-tweaks \033[0m"
+sudo add-apt-repository universe
+if sudo apt install gnome-tweaks -y; then
+    successful_installations+=("gnome-tweaks")
+else
+    failed_installations+=("gnome-tweaks")
+fi
+
+# Extensions:
+# - https://extensions.gnome.org/
+# - Blur My Shell
+# - X11 Gestures (enables swipe desktops with 3 fingers)
+# - 
+
+# X11 Gestures
+echo -e "\n\033[1m[*] Installing touchegg (for X11 Gestures) \033[0m"
+sudo add-apt-repository ppa:touchegg/stable
+if sudo apt install touchegg -y; then
+    successful_installations+=("touchegg (for X11 Gestures)")
+else
+    failed_installations+=("touchegg (for X11 Gestures)")
+fi
 
 
 #echo -e "\n\033[1m[*] Installing Google Chrome \033[0m"
@@ -81,6 +117,13 @@ fi
 #else
     #failed_installations+=("Google Chrome")
 #fi
+
+
+# NVIDIA Drivers
+# sudo apt install nvidia-driver-535 nvidia-dkms-535
+
+# Obsidian
+# 
 
 
 echo -e "\n\n\n\033[32mTools installed successfully:\033[0m"
